@@ -1,2 +1,3 @@
 import BasicText from './BasicText.vue'
-export { BasicText }
+import PickerWheel from './PickerWheel.vue'
+export { BasicText, PickerWheel }
