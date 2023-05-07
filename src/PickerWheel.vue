@@ -1,5 +1,6 @@
 <script>
 import { ref, computed, onMounted, watchEffect } from 'vue'
+import url2lang from 'url2lang'
 
 export default {
   props: {
@@ -15,17 +16,15 @@ export default {
     let result = ref('')
     let resultClassName = ref('')
     let searchOptions = ref(['おすすめ', '安い', 'テイクアウト', '個室', '近く', 'ランチ'])
-    let searchOptionsEnglish = ['recommended', 'cheap', 'takeout', 'private room', 'nearby', 'lunch']
     let searchArea = ref('')
 
-    var isEnglish = computed(() => window.location.pathname.indexOf('/en/') == -1 ? false : true )
+    var startBtnText = ref("Start")
 
     onMounted(() => {
       createRoulette()
 
-      if (isEnglish.value) {
-        searchOptions.value = searchOptionsEnglish
-      }
+      // スタートボタンの文字
+      startBtnText.value = getStartBtnText(url2lang(window.location.pathname))
     })
 
     // この関数は、配列を引数として受け取り、要素数が4以下の場合、
@@ -81,6 +80,16 @@ export default {
 
       // Google TagManager
       dataLayer.push({ event: 'use-webapp' })
+    }
+
+    function getStartBtnText(lang) {
+      if (lang === 'ja') {
+        return 'スタート'
+      } else if (lang === 'ko') {
+        return '시작'
+      } else {
+        return 'Start'
+      }
     }
 
     function getPiWidth(piCount) {
@@ -266,7 +275,7 @@ export default {
 
     }
 
-    return { result, resultClassName, isEnglish, run, buttonDisabled, searchOptions, searchArea }
+    return { result, resultClassName, run, buttonDisabled, searchOptions, searchArea, startBtnText }
   }
 }
 </script>
@@ -303,7 +312,7 @@ export default {
       :disabled="buttonDisabled"
       @click="run()"
     >
-      {{ isEnglish ? 'Start' : 'スタート' }}
+      {{ startBtnText }}
     </button>
   </div>
 </template>
