@@ -1,6 +1,7 @@
 <script>
 import { ref, computed, onMounted, watchEffect } from 'vue'
 import url2lang from 'url2lang'
+import { Analytics } from 'js-takasqr'
 
 export default {
   props: {
@@ -78,8 +79,8 @@ export default {
         searchArea.value = cell[result.value - 1]
       }, 3000)
 
-      // Google TagManager
-      dataLayer.push({ event: 'use-webapp' })
+      // アプリ使用開始をカウント
+      Analytics.useWebApp()
     }
 
     function getStartBtnText(lang) {
