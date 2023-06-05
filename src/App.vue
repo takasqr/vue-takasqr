@@ -41,13 +41,17 @@ export default {
       }
     }
 
-    return { restaurants, colors, inputEvent, textAreaValue }
+    function finished(number, value) {
+      console.log('fin', number, value)
+    }
+
+    return { restaurants, colors, inputEvent, textAreaValue, finished }
   }
 }
 </script>
 
 <template>
-  <PickerWheel :cell="restaurants" :colors="colors" />
+  <PickerWheel :cell="restaurants" :colors="colors" @finished="finished" />
   <div class="mt-6">
     <v-textarea
       rows="10"

@@ -8,7 +8,7 @@ export default {
     cell: Array,
     colors: Array
   },
-  setup(props) {
+  setup(props, context) {
 
 
     watchEffect(() => createRoulette() )
@@ -72,6 +72,9 @@ export default {
       setTimeout(() => {
         result.value = resultNumber
         buttonDisabled.value = false
+
+        // ルーレットの結果を通知
+        context.emit('finished', resultNumber -1, cell[resultNumber -1])
       }, 2500)
 
       // 検索エリア
