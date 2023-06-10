@@ -133,8 +133,8 @@ export default {
       var piWidth = getPiWidth(cell.length)
 
       // 画面の幅が308より小さかったらルーレットのサイズを調整する
-      if (document.body.offsetWidth < (308 + 84)) {
-        width = document.body.offsetWidth - 84
+      if (document.body.offsetWidth < (308 + 10)) {
+        width = document.body.offsetWidth - 10
       }
 
       var sheets = document.styleSheets
@@ -144,6 +144,7 @@ export default {
       sheet.insertRule(`#roulette-restaurant___app---roulette {
                           margin: auto;
                           margin-bottom: 20px;
+                          padding: 0px;
                           position: relative;
                           animation-timing-function: cubic-bezier(0, 0.4, 0.4, 1.04);
                           animation-duration: 1.8s;
